@@ -1,0 +1,53 @@
+<div class="conteiner">
+    <div class="filter">
+        <select style="font-size: 100%;">
+            <option disabled selected value>Категория</option>
+            <option>Книги</option>
+            <option>Канцелярия</option>
+            <option>Все товары</option>
+        </select>
+
+        <div><br />Цена:</div>
+        <input type="number" class="price" placeholder="От" onKeyUp="if(this.value>9999){this.value='9999';} if(this.value<0){this.value='0';}" >
+        <input type="number" class="price" placeholder="До"  onKeyUp="if(this.value>9999){this.value='9999';} if(this.value<0){this.value='0';}">
+        <!-- фильтрация -->
+    </div>
+    <div class="conteinerRight">
+
+        <input class="inp">
+        <!-- поиск -->
+
+        <div class="merchConteiner">
+            <!-- товары -->
+            <div class="merch">
+                КАРТИНКА<br />
+                Название<br />
+                Автор<br />
+                Цена: 500Р
+            </div>
+            <div class="merch">
+                КАРТИНКА<br />
+                Название2<br />
+                Автор<br />
+                Цена: 500Р
+            </div>
+            <div class="merch">
+                КАРТИНКА<br />
+                Название3<br />
+                Автор<br />
+                Цена: 500Р
+            </div>
+            <div class="merch">
+                КАРТИНКА<br />
+                Название5<br />
+                Автор<br />
+                Цена: 500Р
+            </div>
+            <div class="merch">
+                <!-- кнопка добавления -->
+                +
+            </div>
+            <!-- кнопка добавления -->
+        </div>
+    </div>
+</div>
