@@ -1,11 +1,18 @@
 <div class="header">
     <!-- тут будет пикча-иконка -->
-    <h2 class="logo">МОЯ КНИГА</h2>
+    <img width = 150px class="logo" src="../../../assets/img/logo1.png" alt="help">
+
     <!-- что-то возвращает? -->
-    <select class="addr" [ngModel] ??????>
-        <option *ngFor = "let a of address" [ngValue]="a">{{a}}</option> 
-    </select>
-    <!-- добавить click -->
-    <button class="A2">A</button>
+    <select class="addr" >
+        <option *ngFor="let a of address" [ngValue]="a">
+                {{a}}
+
+        </option>
+    </select><div style="display:flex;  gap: 10%;  align-items: center;">
+    <div class="batonED">🖉</div>
+    <div class="batonED">✖</div>
+</div>
 </div>
 
+<div>
+</div>

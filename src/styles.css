@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+body {margin: 0%;
+    background: url("img/background11.jpg") no-repeat; 
+    background-color: white;
+    background-size: 100%;
+}*{ font-family: 'Yanone Kaffeesatz', sans-serif;}
+    
+.back{
+    background: url("img/background10.jpg") no-repeat; 
+    background-color: white;
+    background-size: 100%;
+    }
