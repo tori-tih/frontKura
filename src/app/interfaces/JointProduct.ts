@@ -1,3 +1,4 @@
+import { Bookstore } from "./Bookstore";
 
 export interface JointProduct {
     id: number;
@@ -7,4 +8,6 @@ export interface JointProduct {
     image: string;
 
     nameProduct: string;
+
+    bookstore: Bookstore;
 }

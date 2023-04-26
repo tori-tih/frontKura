@@ -3,11 +3,10 @@
     display: flex;
     justify-content: flex-start;
     gap: 5%;
-
+    align-items: flex-start
 }
 
 .filter {
-    /* display: flex; */
     width: 1500px;
     justify-content: center;
     background-color: white;
@@ -17,11 +16,15 @@
     font-size: 150%;
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-.price{
+
+.price {
     font-size: 100%;
     width: 60px;
     margin-right: 5px;
+    border-radius: 10px;
+    padding: 5px;
 }
+
 .conteinerRight {
     display: flex;
     flex-direction: column;
@@ -44,14 +47,12 @@
     flex-wrap: wrap;
     flex-direction: row;
     width: 815px;
-    /* align-items: stretch; */
-    /* justify-content: flex-start; */
 }
 
 .merch {
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     min-width: 150px;
-    margin-top: 2%;
+    margin-top: 1%;
     justify-content: center;
     background-color: white;
     padding: 20px;
@@ -64,3 +65,37 @@
     color: brown;
     text-shadow: 1px 1px 1px #000;
 }
+
+.load {
+    font-size: 150%;
+    text-align: center;
+    margin-top: 1%;
+}
+
+.sel{
+    font-size: x-large;
+    border-radius: 10px;
+    padding: 5px;
+    width: max-content;
+}
+.sel:hover{
+    color: brown;
+    text-shadow: 1px 1px 1px #000;
+    cursor: pointer;
+}
+
+.batonED {
+    color: #000000;
+    font-size: 100%;
+    margin-right: 7.5px;
+    margin-top: -8px;
+  }
+  
+  .batonED:hover {
+    font-size: 110%;
+    margin-right: 5px;
+    margin-top: -11px;
+    border: 2px;
+    text-shadow: 0.5px 0.5px 0.5px #000;
+    color: brown;
+  }

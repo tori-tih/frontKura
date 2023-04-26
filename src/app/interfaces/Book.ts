@@ -1,4 +1,5 @@
 import { Author } from "./Author";
+import { Bookstore } from "./Bookstore";
 
 
 export interface Book {
@@ -11,4 +12,6 @@ export interface Book {
     nameBook: string;
     yearPublic: number;
     authors: Author[];
+
+    bookstore: Bookstore;
 }

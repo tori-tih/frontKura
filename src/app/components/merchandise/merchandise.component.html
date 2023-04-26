@@ -1,53 +1,90 @@
-<div class="conteiner">
-    <div class="filter">
-        <select style="font-size: 100%;">
-            <option disabled selected value>Категория</option>
-            <option>Книги</option>
-            <option>Канцелярия</option>
-            <option>Все товары</option>
-        </select>
+<div *ngIf="!bookstore; else loggedOut" class="load">Магазины еще не созданы</div>
+<ng-template #loggedOut>
+    <div class="conteiner">
+        <div class="filter">
+            <select class="sel" [(ngModel)]="kategory " (ngModelChange)="emitSelected(kategory)" >
+                <option disabled >Категория</option>
+                <option [ngValue]="1">Книги</option>
+                <option [ngValue]="2">Канцелярия</option>
+                <option [ngValue]="3" selected>Все товары</option>
+            </select>
 
-        <div><br />Цена:</div>
-        <input type="number" class="price" placeholder="От" onKeyUp="if(this.value>9999){this.value='9999';} if(this.value<0){this.value='0';}" >
-        <input type="number" class="price" placeholder="До"  onKeyUp="if(this.value>9999){this.value='9999';} if(this.value<0){this.value='0';}">
-        <!-- фильтрация -->
-    </div>
-    <div class="conteinerRight">
+            <div><br />Цена:</div>
+            <input type="number" class="price" placeholder="От"
+                onKeyUp="if(this.value>9999){this.value='9999';} if(this.value<0){this.value='0';}">
+            <input type="number" class="price" placeholder="До"
+                onKeyUp="if(this.value>9999){this.value='9999';} if(this.value<0){this.value='0';}">
+            <!-- фильтрация -->
 
-        <input class="inp">
-        <!-- поиск -->
+            <div *ngIf="(kategory==1)||(kategory==3)" style="font-size: x-large;">
+                <br>
+                <div style="display: flex; direction: row;">
+                    <div >Авторы </div>
+                    <div class="batonED" style="font-size: 150%; margin-top: -7px;margin-left: 2px;" (click)="addAuthor=true"> +</div>
+                </div>
+                <div *ngFor="let a of authors" style="display: flex; direction: row;font-size: x-large;margin-top: 4px;">
+                    <input type="checkbox" checked> 
+                    <div>{{a.firstname}} {{a.lastname}} </div>
+                    <div class="batonED" style="margin-left: 2px;" (click)="editAuthor(a)">🖉</div>
+                    <div class="batonED" (click)="deleteAuthor(a)">✖</div>
+                </div>
+            </div>
+        </div>
+        <div class="conteinerRight">
 
-        <div class="merchConteiner">
-            <!-- товары -->
-            <div class="merch">
-                КАРТИНКА<br />
-                Название<br />
-                Автор<br />
-                Цена: 500Р
+            <input class="inp" placeholder="Поиск">
+            <!-- поиск -->
+            <div *ngIf="(kategory==1)||(kategory==3)" style="margin-top: 20px; font-size: large;">
+                Книги:
+                <div class="merchConteiner">
+
+                    <!-- товары -->
+                    <div *ngFor="let b of books" class="merch" > 
+                        <!-- (click)="editBook(b)" -->
+                        {{b.nameBook}}<br />
+                        {{b.authors[0]}}<br />
+                        {{b.price}} Р
+                    </div>
+    
+                    <div class="merch" (click)="addBook=true">
+                        <!-- кнопка добавления -->
+                        +
+                    </div>
+                </div>  
             </div>
-            <div class="merch">
-                КАРТИНКА<br />
-                Название2<br />
-                Автор<br />
-                Цена: 500Р
+            <div *ngIf="(kategory==2)||(kategory==3)" style="margin-top: 20px; font-size: large;">
+                Канцелярия:
+                <div class="merchConteiner">
+
+                    <!-- товары -->
+                    <div *ngFor="let b of books" class="merch">
+                        {{b.nameBook}}<br />
+                        {{b.authors[0]}}<br />
+                        {{b.price}} Р
+                    </div>
+    
+                    <div class="merch" (click)="addJP=true">
+                        <!-- кнопка добавления -->
+                        +
+                    </div>
+                </div>  
             </div>
-            <div class="merch">
-                КАРТИНКА<br />
-                Название3<br />
-                Автор<br />
-                Цена: 500Р
-            </div>
-            <div class="merch">
-                КАРТИНКА<br />
-                Название5<br />
-                Автор<br />
-                Цена: 500Р
-            </div>
-            <div class="merch">
-                <!-- кнопка добавления -->
-                +
-            </div>
-            <!-- кнопка добавления -->
         </div>
     </div>
+</ng-template>
+
+<div *ngIf="addBook">
+    <app-book title="Добавить новую книгу" [authors]="authors"(closeEdit)="closeBook($event)"></app-book>
 </div>
+
+<div *ngIf="addAuthor">
+    <app-author title="Добавить нового автора" (closeEdit)="closeAuthor($event)"></app-author>
+</div>
+<div *ngIf="edAuthor">
+    <app-author title="Изменить автора" [author]="author" (closeEdit)="closeAuthor($event)"></app-author>
+</div>
+
+<div *ngIf="addJP">
+    <app-j-product title="Добавить новую канцеляпию" (closeEdit)="closeJP($event)"></app-j-product>
+</div>
+

@@ -1,0 +1,26 @@
+<div class="backM" (click)="close()"></div>
+<div class="block">
+    <div *ngIf=!noStore() class="createBlock">
+        <select *ngIf="bookstors" class="sel" [(ngModel)]="selectedStore" (ngModelChange)="emitSelected()">
+            <option  *ngFor="let a of bookstors|storeSort" [value]="a.id">
+                {{a.address}}
+            </option>
+        </select>
+
+        <form [formGroup]="form2" *ngIf=selectBookstore class="createBlock">
+            <input class="inp" formControlName="address" />
+            <input class="inp" formControlName="number" type="tel" pattern="8|[\+7]+[0-9]{10}"/>
+        </form>
+        <button class="baton" (click)="updateStore()">Сохранить изменения</button>
+        <div style="text-align: center;" *ngIf="mesnotILUHI">ПОЖАЛУЙСТА! <br>{{mesILUHI}}</div>
+    </div>
+    <div class="createBlock">
+        Добавить новый магазин:
+        <form [formGroup]="form" (submit)="confirm()" class="createBlock">
+            <input class="inp" formControlName="address" placeholder="Адрес" name="adr" />
+            <input class="inp" formControlName="number" type="tel" pattern="8|[\+7]+[0-9]{10}" placeholder="Номер телефона"/>
+        </form>
+        <button class="baton" (click)="addStore()">Сохранить</button>
+        <div style="text-align: center;" *ngIf="mesnotILUHI">ПОЖАЛУЙСТА! <br>{{mesnotILUHI}}</div>
+    </div>
+</div>

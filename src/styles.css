@@ -10,3 +10,20 @@ body {margin: 0%;
     background-color: white;
     background-size: 100%;
     }
+    
+.baton{
+    font-size: large;
+    border-radius: 10px;
+    padding: 5px;
+}
+.baton:hover{
+    color: brown;
+    text-shadow: 1px 1px 1px #000;
+    cursor: pointer;
+}
+
+.inp{
+    font-size: large;
+    border-radius: 10px;
+    padding: 5px;
+}

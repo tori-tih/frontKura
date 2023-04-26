@@ -1,0 +1,22 @@
+
+<div class="backM" (click)="close()"></div>
+<div class="block">
+    <div class="createBlock">
+        Добавить новую книгу:
+        
+        <form [formGroup]="form" (submit)="confirm()" class="createBlock">
+            <input class="inp" formControlName="nameBook" placeholder="Название книги" />
+            <input class="inp" formControlName="yearPublic" placeholder="Год публикации"/>
+            <input class="inp" formControlName="price" placeholder="Цена"/>
+            <input class="inp" formControlName="barecode" placeholder="Штрихкод"/>
+            <input class="inp" formControlName="count" placeholder="Количество"/>
+            Выберите авторов:
+            <div *ngFor="let a of authors" style="display: flex; direction: row;font-size: large;margin-top: 4px;">
+                <input type="checkbox" unchecked> 
+                <div>{{a.firstname}} {{a.lastname}} </div>
+            </div>
+        </form>
+        <button class="baton" (click)="addBook()">Сохранить</button>
+        <div style="text-align: center;" *ngIf="mesnotILUHI">{{mesnotILUHI}}</div>
+    </div>
+</div>

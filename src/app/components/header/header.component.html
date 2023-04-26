@@ -1,18 +1,22 @@
 <div class="header">
     <!-- тут будет пикча-иконка -->
-    <img width = 150px class="logo" src="../../../assets/img/logo1.png" alt="help">
-
+    <img width=150px class="logo" src="../../../assets/img/logo1.png" alt="help">
+    (☞ﾟヮﾟ)☞
     <!-- что-то возвращает? -->
-    <select class="addr" >
-        <option *ngFor="let a of address" [ngValue]="a">
-                {{a}}
-
+    <select *ngIf="bookstores" class="addr" [(ngModel)]="selectedStore" (ngModelChange)="emitSelected(selectedStore)" >
+        <option *ngIf=isStore() disabled selected value>
+            Нет созданного магазина
         </option>
-    </select><div style="display:flex;  gap: 10%;  align-items: center;">
-    <div class="batonED">🖉</div>
-    <div class="batonED">✖</div>
-</div>
+        <option *ngFor="let a of bookstores|storeSort" [value]="a.id">
+            {{a.address}}
+        </option>
+    </select>
+
+    <div style="display:flex;  gap: 10%;  align-items: center;">
+        <div class="batonED" (click)="edit=true">🖉</div>
+        <div *ngIf="!isStore()" class="batonED" (click)="delete()">✖</div>
+    </div>
 </div>
 
-<div>
-</div>
+<div *ngIf="edit" ><app-edit-store [bookstors]="bookstores" (closeEdit)="close($event)"/></div>
+

@@ -1,0 +1,13 @@
+
+<div class="backM" (click)="close()"></div>
+<div class="block">
+    <div class="createBlock">
+        {{title}}
+        <form [formGroup]="form" (submit)="confirm()" class="createBlock">
+            <input class="inp" formControlName="firstname" placeholder="Имя" name="adr" />
+            <input class="inp" formControlName="lastname"  placeholder="Фамилия"/>
+        </form>
+        <button class="baton" (click)="addBook()">Сохранить</button>
+        <div style="text-align: center;" *ngIf="mesnotILUHI">{{mesnotILUHI}}</div>
+    </div>
+</div>
