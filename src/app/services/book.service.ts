@@ -18,6 +18,7 @@ export class BookService {
   }
 
   getBookByStore(bookstore: Bookstore): Observable<Book[]>{
+    
     return this.httpClient.post<Book[]>(this.url+"/store", bookstore)
   }
 

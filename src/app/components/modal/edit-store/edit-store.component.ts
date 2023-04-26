@@ -55,6 +55,8 @@ export class EditStoreComponent {
       this.bSservice.addBookstore(bs).subscribe({
         next: bookstore => {
           this.bookstors?.push(bookstore);
+          console.log(bookstore);
+          
           this.form.reset();
           this.mesnotILUHI = "";
         },

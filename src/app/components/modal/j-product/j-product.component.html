@@ -2,14 +2,12 @@
 <div class="backM" (click)="close()"></div>
 <div class="block">
     <div class="createBlock">
-        Добавить новую канцелярию:
-        
+        {{title}}
         <form [formGroup]="form" (submit)="confirm()" class="createBlock">
-            <input class="inp" formControlName="nameProduct" placeholder="Название книги" />
+            <input class="inp" formControlName="nameProduct" placeholder="Название канцелярии" />
             <input class="inp" formControlName="price" placeholder="Цена"/>
             <input class="inp" formControlName="barecode" placeholder="Штрихкод"/>
             <input class="inp" formControlName="count" placeholder="Количество"/>
-            
         </form>
         <button class="baton" (click)="addJP()">Сохранить</button>
         <div style="text-align: center;" *ngIf="mesnotILUHI">{{mesnotILUHI}}</div>

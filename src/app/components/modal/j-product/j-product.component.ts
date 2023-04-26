@@ -13,6 +13,7 @@ import { JointProductService } from 'src/app/services/joint-product.service';
 export class JProductComponent {
   @Input() jp?: JointProduct;
   @Input() bookstore?: Bookstore;
+  @Input() title = ""
   form = this.fb.group({
       id: [NaN],
       barecode: ['', [Validators.required]],
@@ -29,6 +30,15 @@ export class JProductComponent {
 
   ngOnInit() {
     this.form.reset();
+    if(this.title==="Изменить канцелярию"){
+      this.form.setValue({
+        id: this.jp!.id,
+        barecode: this.jp!.barecode,
+        count: this.jp!.count,
+        price: this.jp!.price,
+        nameProduct: this.jp!.nameProduct,
+      })
+    }
   }
 
   close() {
@@ -46,15 +56,18 @@ export class JProductComponent {
       bookstore: this.bookstore!,
       image: ''
     }
+
     // let jp = this.form.getValue() as JointProduct;
 
-  console.log(this.form);
+
   
     if (this.form.invalid) {
       this.mesnotILUHI = "Введите данные корректно"
       console.log(false);
       return;
     }
+
+    
     this.bSservice.addJproduct(jp).subscribe({
       next: x => {
         this.jp = x;

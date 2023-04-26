@@ -2,7 +2,7 @@
 <div class="backM" (click)="close()"></div>
 <div class="block">
     <div class="createBlock">
-        Добавить новую книгу:
+        {{title}}
         
         <form [formGroup]="form" (submit)="confirm()" class="createBlock">
             <input class="inp" formControlName="nameBook" placeholder="Название книги" />
@@ -11,8 +11,14 @@
             <input class="inp" formControlName="barecode" placeholder="Штрихкод"/>
             <input class="inp" formControlName="count" placeholder="Количество"/>
             Выберите авторов:
-            <div *ngFor="let a of authors" style="display: flex; direction: row;font-size: large;margin-top: 4px;">
-                <input type="checkbox" unchecked> 
+            <div *ngFor="let a of authors" style="display: flex; direction: row;font-size: large;margin-top: 4px;" >
+                <div *ngIf="isAut(a); else uncheckd" >
+                    <input type="checkbox" checked (change)="addauthor(a)"> 
+                </div>
+                <ng-template #uncheckd>
+                    <input type="checkbox" unchecked (change)="addauthor(a)"> 
+                </ng-template>
+                
                 <div>{{a.firstname}} {{a.lastname}} </div>
             </div>
         </form>

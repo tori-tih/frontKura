@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Book } from 'src/app/interfaces/Book';
 import { Bookstore } from 'src/app/interfaces/Bookstore';
@@ -19,6 +19,7 @@ export class MerchandiseComponent {
   sub?: Subscription;
   @Input()
   bookstore?: Bookstore;
+  
   error: string = "";
   kategory: number = 1;
   books?: Book[];
@@ -27,26 +28,54 @@ export class MerchandiseComponent {
   addAuthor = false;
   edAuthor = false;
   addJP = false;
+  edJp = false;
+  edBook = false;
+  selectJp?:JointProduct;
+  selectB?: Book;
   author?: Author;
   authors?: Author[];
+  authorsSelect?: Author[];
 
-
+  start = false;
   constructor(private authorService: AuthorService,
     private bookstoreService: BookstoreService,
     private bookService: BookService,
     private jointProductService: JointProductService) {
+
+  }
+
+  ngOnInit() {
+    this.emitSelected(3);
     this.sub = this.authorService.getAuthors().subscribe({
       next: data => {
         this.authors = data;
+        this.authorsSelect = data;
+      },
+      error: e => {
+        this.error = "e"
+      }
+    });
+    
+    if(this.bookstore){
+    this.sub = this.jointProductService.getJproductByStore(this.bookstore!).subscribe({
+      next: data => {
+        this.jproductS = data;
+      },
+      error: e => {
+        this.error = "e"
+      }
+    });
+    this.sub = this.bookService.getBookByStore(this.bookstore!).subscribe({
+      next: data => {
+        this.books = data;
       },
       error: e => {
         this.error = "e"
       }
     });
   }
-
-  ngOnInit() {
-    this.emitSelected(1);
+  }
+  ngOnChanges(changes: SimpleChanges): void {   if(this.start) this.ngOnInit();  else this.start=true  
   }
   ngOnDestroy() {
     this.sub?.unsubscribe();
@@ -126,11 +155,64 @@ export class MerchandiseComponent {
   }
 
   closeBook(book: Book){
-    this.addBook=false;
+    if(this.addBook) {
+      this.books?.push(book)
+    this.addBook=false;}
+    if(this.edBook){
+      this.books = this.books?.map(x => x.id === book.id ? book : x);
+    this.edBook=false;}
+  }
+  clickEdBook(book: Book  ){
+    this.edBook=true;
+    this.selectB = book;
+  }
+  closeJP(jp: JointProduct){
+    if(this.addJP){
+    this.jproductS?.push(jp);
+    this.addJP=false;}else{
+      this.edJp=false;
+      this.jproductS = this.jproductS?.map(x => x.id === jp.id ? jp : x);
+    }
+  }
+  clickEdJp(jp: JointProduct){
+    this.edJp=true;
+    this.selectJp = jp;
+  }
+  lenAut(a: Author[]): boolean{
+
+    return (a.length==0)
   }
 
-  closeJP(jp: JointProduct){
-this.addJP=false;
+  deleteBook(b: Book){
+    console.log("del");
+    this.sub = this.bookService.deleteBook(b.id).subscribe({
+      next: data => {
+        this.books = this.books?.filter(x=>x.id !== b.id);
+      },
+      error: e => {
+        this.error = "e"
+      }
+    });
+    
+  }
+  deletJP(jp: JointProduct){
+    this.sub = this.jointProductService.deleteJproductk(jp.id).subscribe({
+      next: data => {
+        this.jproductS = this.jproductS?.filter(x=>x.id !== jp.id);
+      },
+      error: e => {
+        this.error = "e"
+      }
+    });
+  }
+  addauthor(a: Author) {
+    if (this.authorsSelect?.find(x => x.id == a.id)) {
+      this.authorsSelect = this.authorsSelect?.filter(x => x.id !== a.id);
+    } else {
+      this.authorsSelect?.push(a);
+    }
+    console.log(this.authorsSelect);
+
   }
 }
 

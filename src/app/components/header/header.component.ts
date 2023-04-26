@@ -42,9 +42,13 @@ export class HeaderComponent {
   }
 
   emitSelected(id: number){
-    console.log("вывод букстороа");
+    
     if(this.bookstores){
     this.bookstore = this.bookstores.find(st => st.id == this.selectedStore);
+    console.log("букстор с хидера:");
+    console.log(this.bookstore);
+
+    
     this.outputStore.emit(this.bookstore);}
   }
 

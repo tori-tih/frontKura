@@ -47,6 +47,7 @@
     flex-wrap: wrap;
     flex-direction: row;
     width: 815px;
+    
 }
 
 .merch {
@@ -59,13 +60,37 @@
     border-radius: 10px;
     font-size: 150%;
     text-align: center;
+    position: relative;
+    align-items: center;
+    display: flex;
+
 }
 
+.close{
+    display: none;
+  }
 .merch:hover {
     color: brown;
     text-shadow: 1px 1px 1px #000;
+    
 }
+.merch:hover .close{
+    display: inline;
+    position: absolute;
+    right: 5px;
+    top: 15px;
+    color: #5f00007e;
+    font-size: 60%;
+    margin-right: 7.5px;
+    margin-top: -8px;
+  }
 
+  .merch:hover .close:hover{
+    border: 2px;
+    text-shadow: 0.5px 0.5px 0.5px #000;
+    color: rgba(55, 0, 255, 0.074);
+    cursor: pointer;
+  }
 .load {
     font-size: 150%;
     text-align: center;
