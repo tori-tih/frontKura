@@ -30,7 +30,7 @@ export class JProductComponent {
 
   ngOnInit() {
     this.form.reset();
-    if(this.title==="Изменить канцелярию"){
+    if(this.title=="Изменить канцелярию"){
       this.form.setValue({
         id: this.jp!.id,
         barecode: this.jp!.barecode,
@@ -63,7 +63,6 @@ export class JProductComponent {
   
     if (this.form.invalid) {
       this.mesnotILUHI = "Введите данные корректно"
-      console.log(false);
       return;
     }
 

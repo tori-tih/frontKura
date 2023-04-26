@@ -5,6 +5,9 @@
     gap: 5%;
     align-items: flex-start
 }
+/* .baton{
+    height: min-content;
+} */
 
 .filter {
     width: 1500px;

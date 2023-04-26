@@ -11,9 +11,12 @@
 
             <div><br />Цена:</div>
             <input type="number" class="price" placeholder="От"
-                onKeyUp="if(this.value>9999){this.value='9999';} if(this.value<0){this.value='0';}">
+                [(ngModel)]="priceStart"
+                style="width: max-content;">
             <input type="number" class="price" placeholder="До"
-                onKeyUp="if(this.value>9999){this.value='9999';} if(this.value<0){this.value='0';}">
+                [(ngModel)]="priveEnd"
+                style="width: max-content;">
+                <!-- <button class="baton" (click)="filterprice()">✔</button> -->
             <!-- фильтрация -->
 
             <div *ngIf="(kategory==1)||(kategory==3)" style="font-size: x-large;">
@@ -34,17 +37,16 @@
         </div>
         <div class="conteinerRight">
 
-            <input class="inp" placeholder="Поиск">
+            <input class="inp" placeholder="Поиск" [(ngModel)]="found">
             <!-- поиск -->
-            <div *ngIf="(kategory==1)||(kategory==3)" style="margin-top: 20px; font-size: large;">
+            <div *ngIf="((kategory==1)||(kategory==3))&&books" style="margin-top: 20px; font-size: large;">
                 Книги:
                 <div class="merchConteiner">
-                    <div *ngFor="let b of books" class="merch">
+                    <div *ngFor="let b of books!|pricefilter:priceStart:priveEnd:found" class="merch">
                         <div class="close" (click)="deleteBook(b)">✖</div>
                         <!-- товары -->
                         <div (click)="clickEdBook(b)">
                             <!-- (click)="editBook(b)" -->
-
                             {{b.nameBook}}<br />
                             <div *ngIf="!lenAut(b.authors)" style="font-size: large; margin-top: 4px;">
                                 {{b.authors[0].lastname}}
@@ -70,8 +72,6 @@
                             <div>{{b.nameProduct}}</div>
                             <div style="font-size: medium;margin-top: 4px;">{{b.price}} Р</div>
                         </div>
-
-
                     </div>
                     <div class="merch" (click)="addJP=true">
                         <div>+</div>

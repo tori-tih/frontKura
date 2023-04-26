@@ -14,6 +14,7 @@ import { StoreSortPipe } from './pipes/store-sort.pipe';
 import { BookComponent } from './components/modal/book/book.component';
 import { AuthorComponent } from './components/modal/author/author.component';
 import { JProductComponent } from './components/modal/j-product/j-product.component';
+import { PricefilterPipe } from './pipes/pricefilter.pipe';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { JProductComponent } from './components/modal/j-product/j-product.compon
     StoreSortPipe,
     BookComponent,
     AuthorComponent,
-    JProductComponent
+    JProductComponent,
+    PricefilterPipe
   ],
   imports: [
     FormsModule,

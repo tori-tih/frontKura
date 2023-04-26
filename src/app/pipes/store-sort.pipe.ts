@@ -7,7 +7,8 @@ import { Bookstore } from '../interfaces/Bookstore';
 export class StoreSortPipe implements PipeTransform {
 
   transform(value: Bookstore[]): Bookstore[] {
-    return  value.sort((x, y) => x.address.toLowerCase().trim().localeCompare(y.address.toLowerCase().trim()));;
+    return  value.sort((x, y) => 
+    x.address.toLowerCase().trim().localeCompare(y.address.toLowerCase().trim()));
   }
 
 }
