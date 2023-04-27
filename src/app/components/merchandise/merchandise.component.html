@@ -22,22 +22,22 @@
             <div *ngIf="(kategory==1)||(kategory==3)" style="font-size: x-large;">
                 <br>
                 <div style="display: flex; direction: row;">
-                    <div>Авторы </div>
-                    <div class="batonED" style="font-size: 150%; margin-top: -7px;margin-left: 2px;"
+                    <div>Авторы: </div>
+                    <div class="batonED" style="font-size: 150%; margin-top: -5px;margin-left: 2px;"
                         (click)="addAuthor=true"> +</div>
                 </div>
                 <div *ngFor="let a of authors"
                     style="display: flex; direction: row;font-size: x-large;margin-top: 4px;">
-                    <input type="checkbox" checked (change)="addauthor(a)">
-                    <div>{{a.firstname}} {{a.lastname}} </div>
-                    <div class="batonED" style="margin-left: 2px;" (click)="editAuthor(a)">🖉</div>
+                    <!-- <input type="checkbox" checked (change)="addauthor(a)"> -->
+                    <div class="aut" (click)="editAuthor(a)">{{a.firstname}} {{a.lastname}} </div>
+                    <!-- <div class="batonED" style="margin-left: 2px;" >🖉</div> -->
                     <div class="batonED" (click)="deleteAuthor(a)"> ✖</div>
                 </div>
             </div>
         </div>
         <div class="conteinerRight">
 
-            <input class="inp" placeholder="Поиск" [(ngModel)]="found">
+            <input class="inp" placeholder="Поиск по имени" [(ngModel)]="found">
             <!-- поиск -->
             <div *ngIf="((kategory==1)||(kategory==3))&&books" style="margin-top: 20px; font-size: large;">
                 Книги:
@@ -64,7 +64,7 @@
             <div *ngIf="(kategory==2)||(kategory==3)" style="margin-top: 20px; font-size: large;">
                 Канцелярия:
                 <div class="merchConteiner">
-                    <div *ngFor="let b of jproductS" class="merch">
+                    <div *ngFor="let b of jproductS!|jProductFilter:priceStart:priveEnd:found" class="merch">
                         <div class="close" (click)="deletJP(b)">✖</div>
                         <!-- товары -->
                         <div style="flex-direction: column"
@@ -106,3 +106,4 @@
     <app-j-product [bookstore]="bookstore" [jp]="selectJp" title="Изменить канцелярию"
         (closeEdit)="closeJP($event)"></app-j-product>
 </div>
+<app-err-del-aut *ngIf="errDelAut" (closeEdit)="errDelAut=false"/>
