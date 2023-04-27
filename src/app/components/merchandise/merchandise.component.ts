@@ -9,6 +9,8 @@ import { BookstoreService } from 'src/app/services/bookstore.service';
 import { JointProductService } from 'src/app/services/joint-product.service';
 import { Author } from 'src/app/interfaces/Author';
 import { PricefilterPipe } from 'src/app/pipes/pricefilter.pipe';
+import { JProductComponent } from '../modal/j-product/j-product.component';
+import { JProductFilterPipe } from 'src/app/pipes/j-product-filter.pipe';
 
 @Component({
   selector: 'app-merchandise',
@@ -31,6 +33,7 @@ export class MerchandiseComponent {
   addJP = false;
   edJp = false;
   edBook = false;
+  errDelAut = false;
   selectJp?: JointProduct;
   selectB?: Book;
   author?: Author;
@@ -64,6 +67,7 @@ export class MerchandiseComponent {
       this.sub = this.jointProductService.getJproductByStore(this.bookstore!).subscribe({
         next: data => {
           this.jproductS = data;
+          this.founMaxPrice(data);
         },
         error: e => {
           this.error = "e"
@@ -72,12 +76,17 @@ export class MerchandiseComponent {
       this.sub = this.bookService.getBookByStore(this.bookstore!).subscribe({
         next: data => {
           this.books = data;
+          this.founMaxPrice(data);
         },
         error: e => {
           this.error = "e"
         }
       });
     }
+  }
+  founMaxPrice(data: any){
+    let e = data.sort((x: { price: number; },y: { price: number; })=> y.price - x.price)[0].price
+    if(this.priveEnd<e) this.priveEnd=e
   }
   ngOnChanges(changes: SimpleChanges): void {
     if (this.start) this.ngOnInit(); else this.start = true
@@ -148,14 +157,19 @@ export class MerchandiseComponent {
   editAuthor(author: Author) {
     this.author = author;
     this.edAuthor = true;
+    
   }
   deleteAuthor(author: Author) {
     this.sub = this.authorService.deleteAuthor(author.id).subscribe({
       next: data => {
+        console.log("del");
+        
         this.authors = this.authors?.filter(x => x.id !== author.id);
       },
       error: e => {
-        this.error = "e"
+        this.error = e
+        console.log(e);
+        this.errDelAut=true;
       }
     });
   }
@@ -171,6 +185,7 @@ export class MerchandiseComponent {
       this.edBook = false;
       this.books = this.books?.map(x => x.id === book.id ? book : x);
     }
+    this.founMaxPrice(this.books)
   }
   clickEdBook(book: Book) {
     this.edBook = true;
@@ -179,11 +194,15 @@ export class MerchandiseComponent {
   closeJP(jp: JointProduct) {
     if (this.addJP) {
       this.addJP = false;
-      this.jproductS?.push(jp);
+      let a = this.jproductS;
+      a?.push(jp)
+      this.jproductS = new JProductFilterPipe().transform(a!, this.priceStart, this.priveEnd, this.found);
+      // this.jproductS?.push(jp);
     } else {
       this.edJp = false;
       this.jproductS = this.jproductS?.map(x => x.id === jp.id ? jp : x);
     }
+    this.founMaxPrice(this.jproductS)
   }
   clickEdJp(jp: JointProduct) {
     this.edJp = true;

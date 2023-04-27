@@ -15,6 +15,8 @@ import { BookComponent } from './components/modal/book/book.component';
 import { AuthorComponent } from './components/modal/author/author.component';
 import { JProductComponent } from './components/modal/j-product/j-product.component';
 import { PricefilterPipe } from './pipes/pricefilter.pipe';
+import { ErrDelAutComponent } from './components/modal/err-del-aut/err-del-aut.component';
+import { JProductFilterPipe } from './pipes/j-product-filter.pipe';
 
 
 @NgModule({
@@ -28,7 +30,9 @@ import { PricefilterPipe } from './pipes/pricefilter.pipe';
     BookComponent,
     AuthorComponent,
     JProductComponent,
-    PricefilterPipe
+    PricefilterPipe,
+    ErrDelAutComponent,
+    JProductFilterPipe
   ],
   imports: [
     FormsModule,

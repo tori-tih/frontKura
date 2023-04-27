@@ -113,17 +113,23 @@
 }
 
 .batonED {
-    color: #000000;
-    font-size: 100%;
+    color: #00000074;
+    font-size: 50%;
     margin-right: 7.5px;
-    margin-top: -8px;
+    margin-left: 5px;
+    margin-top: 3px;
   }
   
   .batonED:hover {
-    font-size: 110%;
-    margin-right: 5px;
-    margin-top: -11px;
+    /* font-size: 60%; */
+    /* margin-right: 5px;
+    margin-top: -11px; */
     border: 2px;
     text-shadow: 0.5px 0.5px 0.5px #000;
-    color: brown;
+    color: rgba(165, 42, 42, 0.477);
+  }
+
+  .aut:hover{
+    text-shadow: 0.5px 0.5px 0.5px #000;
+    color: rgba(165, 42, 42, 0.477);
   }
